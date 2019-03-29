@@ -1,0 +1,38 @@
+server:
+  port: 10001
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+    health-check-url-path: /actuator/health
+    metadata-map:
+              user.name: "siid"         #These two are needed so that the server can access the protected client endpoints
+              user.password: "123"
+  client:
+      registryFetchIntervalSeconds: 5
+      serviceUrl:
+        defaultZone: http://172.18.1.133:10000/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+spring:
+  profiles:
+    active: safe
+  application:
+    name: AdminServer
+  security:
+    user:
+      name: "siid"
+      password: "123"
+
+info:
+  description: "This is Admin Info"
+  author: "siid"
+  home:
+    name1: "one"
+    name2: "two"
